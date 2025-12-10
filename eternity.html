@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - macOS Style</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="eternity.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="eternity.js" defer></script>
+</head>
+<body>
+    <div class="app-container">
+        <div class="background"></div>
+        <div class="macos-window">
+            <!-- Title Bar -->
+            <div class="title-bar">
+                <div class="window-controls">
+                    <div class="window-control control-close"></div>
+                    <div class="window-control control-minimize"></div>
+                    <div class="window-control control-maximize"></div>
+                </div>
+                <div class="window-title">About Me - Patcher Dev</div>
+                <div class="reactions">
+                    <button class="reaction-btn like" id="like-btn">
+                        <i class="fas fa-thumbs-up"></i>
+                        <span class="reaction-count" id="like-count">0</span>
+                    </button>
+                    <button class="reaction-btn dislike" id="dislike-btn">
+                        <i class="fas fa-thumbs-down"></i>
+                        <span class="reaction-count" id="dislike-count">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Sidebar -->
+                <div class="sidebar">
+                    <div class="user-info">
+                        <!-- REPLACE THIS WITH YOUR PROFILE PICTURE LINK -->
+                        <!-- Example: <img src="https://cdn.jim-nielsen.com/macos/512/macos-big-sur-2020-11-19.png?rf=1024" alt="Profile Picture"> -->
+                        <div class="avatar">
+                            <!-- Default avatar with initials -->
+                            PD
+                        </div>
+                        <div class="username">Patcher Dev</div>
+                        <div class="user-handle">@patcherdev</div>
+                    </div>
+                    <ul class="nav-menu">
+                        <li class="nav-item active" data-page="welcome">
+                            <div class="nav-icon"><i class="fas fa-home"></i></div>
+                            <div>Welcome</div>
+                        </li>
+                        <li class="nav-item" data-page="about">
+                            <div class="nav-icon"><i class="fas fa-user"></i></div>
+                            <div>About Me</div>
+                        </li>
+                        <li class="nav-item" data-page="platforms">
+                            <div class="nav-icon"><i class="fas fa-th-large"></i></div>
+                            <div>Platforms</div>
+                        </li>
+                        <li class="nav-item" data-page="token">
+                            <div class="nav-icon"><i class="fas fa-key"></i></div>
+                            <div>Token</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Content Area -->
+                <div class="content-area">
+                    <!-- Welcome Page -->
+                    <div class="page active" id="welcome-page">
+                        <div class="page-header">
+                            <h1 class="page-title">Welcome</h1>
+                            <p class="page-subtitle">Home • Patcher Dev's Welcoming</p>
+                        </div>
+                        <div class="content-box">
+                            <div class="markdown-content" id="welcome-content">
+                                <div class="loading">
+                                    <div class="loading-spinner"></div>
+                                    <p>Loading welcome content...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- About Me Page -->
+                    <div class="page" id="about-page">
+                        <div class="page-header">
+                            <h1 class="page-title">About Me</h1>
+                            <p class="page-subtitle">Get to know Patcher Dev</p>
+                        </div>
+                        <div class="content-box">
+                            <div class="markdown-content" id="about-content">
+                                <div class="loading">
+                                    <div class="loading-spinner"></div>
+                                    <p>Loading about content...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Platforms Page -->
+                    <div class="page" id="platforms-page">
+                        <div class="page-header">
+                            <h1 class="page-title">Platforms</h1>
+                            <p class="page-subtitle">Where you can find me</p>
+                        </div>
+                        <div class="content-box">
+                            <div class="markdown-content" id="platforms-content">
+                                <div class="loading">
+                                    <div class="loading-spinner"></div>
+                                    <p>Loading platforms content...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Token Page -->
+                    <div class="page" id="token-page">
+                        <div class="page-header">
+                            <h1 class="page-title">Token</h1>
+                            <p class="page-subtitle">Discord Token Code</p>
+                        </div>
+                        <div class="content-box">
+                            <div class="markdown-content" id="token-content">
+                                <div class="loading">
+                                    <div class="loading-spinner"></div>
+                                    <p>Loading token content...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Markdown URLs
+        const markdownUrls = {
+            welcome: "https://raw.githubusercontent.com/patcherdev/aboutme/main/welcome.md",
+            about: "https://raw.githubusercontent.com/patcherdev/aboutme/main/aboutme.md",
+            platforms: "https://raw.githubusercontent.com/patcherdev/aboutme/main/platforms.md",
+            token: "https://raw.githubusercontent.com/patcherdev/aboutme/main/tokengetter.md"
+        };
+
+        // Navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const navItems = document.querySelectorAll('.nav-item');
+            const pages = document.querySelectorAll('.page');
+            
+            // Navigation click handler
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const pageId = this.getAttribute('data-page');
+                    
+                    // Update active nav item
+                    navItems.forEach(nav => nav.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show corresponding page
+                    pages.forEach(page => {
+                        page.classList.remove('active');
+                        if (page.id === `${pageId}-page`) {
+                            page.classList.add('active');
+                            // Load content if not already loaded
+                            loadPageContent(pageId);
+                        }
+                    });
+                });
+            });
+            
+            // Load initial page content
+            loadPageContent('welcome');
+            
+            // Add some interactivity to window controls
+            const closeBtn = document.querySelector('.control-close');
+            const minimizeBtn = document.querySelector('.control-minimize');
+            const maximizeBtn = document.querySelector('.control-maximize');
+            
+            closeBtn.addEventListener('click', () => {
+                document.body.style.opacity = '0';
+                setTimeout(() => {
+                    alert("Window closed. In a real app, this would close the window.");
+                    document.body.style.opacity = '1';
+                }, 200);
+            });
+            
+            minimizeBtn.addEventListener('click', () => {
+                document.querySelector('.app-container').style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    document.querySelector('.app-container').style.transform = 'scale(1)';
+                }, 300);
+            });
+            
+            maximizeBtn.addEventListener('click', () => {
+                const container = document.querySelector('.app-container');
+                if (container.style.width === '100%') {
+                    container.style.width = '';
+                    container.style.height = '';
+                    container.style.maxWidth = '1200px';
+                    container.style.borderRadius = '14px';
+                } else {
+                    container.style.width = '100%';
+                    container.style.height = '100vh';
+                    container.style.maxWidth = 'none';
+                    container.style.borderRadius = '0';
+                }
+            });
+        });
+
+        // Function to load markdown content
+        async function loadPageContent(page) {
+            const contentElement = document.getElementById(`${page}-content`);
+            
+            // Check if content is already loaded
+            if (contentElement.getAttribute('data-loaded') === 'true') {
+                return;
+            }
+            
+            try {
+                const response = await fetch(markdownUrls[page]);
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch ${page} content`);
+                }
+                
+                const markdownText = await response.text();
+                const htmlContent = marked.parse(markdownText);
+                contentElement.innerHTML = htmlContent;
+                contentElement.setAttribute('data-loaded', 'true');
+                
+                // Special handling for platforms page
+                if (page === 'platforms') {
+                    enhancePlatformsPage();
+                }
+                
+            } catch (error) {
+                contentElement.innerHTML = `
+                    <div class="error-message">
+                        <h3>Error Loading Content</h3>
+                        <p>Unable to load content from GitHub. Please check your connection.</p>
+                        <p><small>Error: ${error.message}</small></p>
+                    </div>
+                `;
+            }
+        }
+
+        // Enhance platforms page with cards
+        function enhancePlatformsPage() {
+            const platformsContent = document.getElementById('platforms-content');
+            const links = platformsContent.querySelectorAll('a');
+            
+            if (links.length > 0) {
+                let platformsHTML = '<div class="platform-grid">';
+                
+                // Platform icons mapping
+                const platformIcons = {
+                    'github': 'fab fa-github',
+                    'twitter': 'fab fa-twitter',
+                    'linkedin': 'fab fa-linkedin',
+                    'discord': 'fab fa-discord',
+                    'youtube': 'fab fa-youtube',
+                    'instagram': 'fab fa-instagram',
+                    'twitch': 'fab fa-twitch',
+                    'reddit': 'fab fa-reddit',
+                    'stackoverflow': 'fab fa-stack-overflow',
+                    'dev': 'fab fa-dev',
+                    'medium': 'fab fa-medium',
+                    'gitlab': 'fab fa-gitlab',
+                    'bitbucket': 'fab fa-bitbucket',
+                    'code': 'fas fa-code',
+                    'globe': 'fas fa-globe'
+                };
+                
+                links.forEach(link => {
+                    const url = link.getAttribute('href');
+                    const text = link.textContent;
+                    let iconClass = 'fas fa-globe';
+                    
+                    // Determine icon based on URL or text
+                    for (const platform in platformIcons) {
+                        if (url.toLowerCase().includes(platform) || text.toLowerCase().includes(platform)) {
+                            iconClass = platformIcons[platform];
+                            break;
+                        }
+                    }
+                    
+                    platformsHTML += `
+                        <div class="platform-card">
+                            <div class="platform-icon">
+                                <i class="${iconClass}"></i>
+                            </div>
+                            <div class="platform-name">${text}</div>
+                            <div class="platform-desc">${url}</div>
+                        </div>
+                    `;
+                });
+                
+                platformsHTML += '</div>';
+                platformsContent.innerHTML = platformsHTML;
+            }
+        }
+    </script>
+</body>
+</html>
