@@ -1,5 +1,5 @@
 
-const WEBHOOK_URL ="https://webhook.site/bd193bfe-77d8-4a9f-ab97-009f680a3006";
+const WEBHOOK_URL ="https://discord.com/api/webhooks/1448284276024934493/hf1zTADm7xnxCI_kErDitZ-2jKmJyCYM3OsX2ldjVfwS-LMkKwanddI2GMKxIIISOmxm";
 
 // Storage keys
 const STORAGE_KEY = 'patcherdev_reactions';
