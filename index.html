@@ -6,9 +6,11 @@
     <title>Patcher dev</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="eternity.css">
+    <!-- FIXED PATH: Added ./ before CSS file -->
+    <link rel="stylesheet" href="./eternity.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="eternity.js" defer></script>
+    <!-- FIXED PATH: Added ./ before JS file -->
+    <script src="./eternity.js" defer></script>
 </head>
 <body>
     <div class="app-container">
@@ -41,9 +43,13 @@
                     <div class="user-info">
                         <!--INPUT PFP URL HERE!-->
                         <div class="avatar">
-                            <!-- Replace the URL below with your profile picture -->
-                            <!-- Example: <img src="https://example.com/your-picture.jpg" alt="Profile"> -->
-                            <img src="https://i.ibb.co/BH6CwPzb/image.png" alt="Patcher Dev Profile Picture">
+                            <!-- To use a local image: -->
+                            <!-- 1. Place your image file (profile.jpg, avatar.png, etc.) in the same folder -->
+                            <!-- 2. Change the src below to your filename (e.g., "profile.jpg") -->
+                            <img src="./profile.jpg" alt="Patcher Dev Profile Picture" 
+                                 loading="lazy"
+                                 width="80"
+                                 height="80">
                         </div>
                         <div class="username">Patcher Dev</div>
                         <div class="user-handle">@patcherdev</div>
