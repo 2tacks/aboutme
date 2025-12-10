@@ -1,19 +1,5 @@
-/**
- * eternity.js - Like/Dislike System for Patcher Dev's Portfolio
- * 
- * WEBHOOK SETUP:
- * 1. Create a Discord webhook or use webhook.site
- * 2. Copy your webhook URL
- * 3. Replace the WEBHOOK_URL below with your actual URL
- * 
- * Discord Webhook Example: "https://discord.com/api/webhooks/123456789/abcdefghijklmnopqrstuvwxyz"
- * Webhook.site Example: "https://webhook.site/your-unique-id"
- */
 
-// ============ CONFIGURATION ============
-// REPLACE THIS WITH YOUR ACTUAL WEBHOOK URL
-const WEBHOOK_URL = "https://webhook.site/bd193bfe-77d8-4a9f-ab97-009f680a3006";
-// =======================================
+const WEBHOOK_URL ="https://webhook.site/bd193bfe-77d8-4a9f-ab97-009f680a3006";
 
 // Storage keys
 const STORAGE_KEY = 'patcherdev_reactions';
