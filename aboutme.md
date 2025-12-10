@@ -7,7 +7,7 @@
 - Deep interest in security research, system testing, bug hunting, and pushing tech to its limits.
 - Always reverse‑engineering something and finding new ways to break and improve systems.
 - Biggest fear: seeing one of my creations get deprecated, archived, or wiped off the internet.
-- I Sometimes Exploit Multi Billion Dollar Companys But NEVER Take Down One.
+- I Like Helping Loyal Friends Of Mines In Coding If They Are Stuck In A RabbitHole.
 ## What I Do
 - Web development (frontend & backend).
 - Python tools, CLIs, scripts, and automation.
